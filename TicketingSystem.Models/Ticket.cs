@@ -11,6 +11,7 @@ namespace TicketingSystem.Models
         public Ticket()
         {
             this.Comments = new HashSet<Comment>();
+            this.Priority = PriorityType.Medium;
         }
 
         [Key]
@@ -20,7 +21,6 @@ namespace TicketingSystem.Models
         [StringLength(50,MinimumLength=3)]
         public string Title { get; set; }
 
-        [DefaultValue(PriorityType.Medium)]
         public PriorityType Priority { get; set; }
 
         [StringLength(1000)]

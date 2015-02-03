@@ -67,6 +67,7 @@ namespace TicketingSystem.Web.App_Start
         {
             kernel.Bind<ITicketingSystemData>().To<TicketingSystemData>();
             kernel.Bind<DbContext>().To<TicketingSystemDbContext>();
+            kernel.Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
         }        
     }
 }

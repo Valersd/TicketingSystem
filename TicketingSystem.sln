@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSystem.Data", "Tic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSystem.Web", "TicketingSystem.Web\TicketingSystem.Web.csproj", "{67B5398E-E5B2-4B75-87BF-21DD692A43E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketingSystem.Common", "TicketingSystem.Common\TicketingSystem.Common.csproj", "{0F16D0AD-9A50-443D-AC4A-939FE4AA020F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{67B5398E-E5B2-4B75-87BF-21DD692A43E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67B5398E-E5B2-4B75-87BF-21DD692A43E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67B5398E-E5B2-4B75-87BF-21DD692A43E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F16D0AD-9A50-443D-AC4A-939FE4AA020F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F16D0AD-9A50-443D-AC4A-939FE4AA020F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F16D0AD-9A50-443D-AC4A-939FE4AA020F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F16D0AD-9A50-443D-AC4A-939FE4AA020F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

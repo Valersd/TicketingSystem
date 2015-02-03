@@ -11,9 +11,9 @@ namespace TicketingSystem.Data
         {
         }
 
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Ticket> Tickets { get; set; }
-        public virtual DbSet<Comment> Comments { get; set; }
+        public virtual IDbSet<Category> Categories { get; set; }
+        public virtual IDbSet<Ticket> Tickets { get; set; }
+        public virtual IDbSet<Comment> Comments { get; set; }
 
         public static TicketingSystemDbContext Create()
         {

@@ -15,11 +15,11 @@ namespace TicketingSystem.Models
 
         public User()
         {
+            this.Points = 10;
             this.Tickets = new HashSet<Ticket>();
             this.Comments = new HashSet<Comment>();
         }
 
-        [DefaultValue(10)]
         public int Points { get; set; }
 
         public virtual ICollection<Ticket> Tickets
