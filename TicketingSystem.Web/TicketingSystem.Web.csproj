@@ -252,6 +252,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TicketingSystem.Common\TicketingSystem.Common.csproj">
+      <Project>{0f16d0ad-9a50-443d-ac4a-939fe4aa020f}</Project>
+      <Name>TicketingSystem.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TicketingSystem.Data\TicketingSystem.Data.csproj">
       <Project>{045e15ee-ecc7-4f53-aee5-e930ca8d461d}</Project>
       <Name>TicketingSystem.Data</Name>
