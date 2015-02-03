@@ -1,8 +1,9 @@
 ﻿using System.Data.Entity;
 using TicketingSystem.Models;
+
 namespace TicketingSystem.Data
 {
-    interface ITicketingSystemData
+    public interface ITicketingSystemData
     {
         IRepository<Category> Categories { get; }
         IRepository<Comment> Comments { get; }
