@@ -52,7 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseRepository.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="ITicketingSystemData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TicketingSystemData.cs" />
     <Compile Include="TicketingSystemDbContext.cs" />
   </ItemGroup>
   <ItemGroup>

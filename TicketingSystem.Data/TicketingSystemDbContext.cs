@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 using TicketingSystem.Models;
 
 namespace TicketingSystem.Data
@@ -15,9 +11,14 @@ namespace TicketingSystem.Data
         {
         }
 
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Ticket> Tickets { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
+
         public static TicketingSystemDbContext Create()
         {
             return new TicketingSystemDbContext();
         }
+
     }
 }
