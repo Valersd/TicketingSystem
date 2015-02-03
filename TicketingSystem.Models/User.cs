@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace TicketingSystem.Models
@@ -12,6 +10,30 @@ namespace TicketingSystem.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser
     {
+        private ICollection<Ticket> tickets;
+        private ICollection<Comment> comments;
+
+        public User()
+        {
+            this.Tickets = new HashSet<Ticket>();
+            this.Comments = new HashSet<Comment>();
+        }
+
+        [DefaultValue(10)]
+        public int Points { get; set; }
+
+        public virtual ICollection<Ticket> Tickets
+        {
+            get { return this.tickets; }
+            set { this.tickets = value; }
+        }
+
+        public virtual ICollection<Comment> Comments
+        {
+            get { return this.comments; }
+            set { this.comments = value; }
+        }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

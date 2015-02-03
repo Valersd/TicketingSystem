@@ -52,7 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Category.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="PriorityType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ticket.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
