@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    -ms-word-wrap: break-word;
+    word-wrap: break-word;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -21,4 +23,11 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+/*My Rules*/
+
+.text-justify{
+    text-align:justify;
 }

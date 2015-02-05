@@ -1,0 +1,19 @@
+﻿@model TicketingSystem.Web.ViewModels.TicketIndex
+
+<div class="col-sm-4">
+    <h3>@Model.Title</h3>
+    <p>
+        <strong>@Html.DisplayNameFor(m => m.Category): </strong>
+        @Html.DisplayFor(m => m.Category)
+    </p>
+    <p>
+        <strong>@Html.DisplayNameFor(m=>m.Author): </strong>
+        @Html.DisplayFor(m=>m.Author)
+    </p>
+    <p>
+        @Html.DisplayFor(m=>m.CommentsCount) comment(s)
+    </p>
+    <p>
+        @Html.ActionLink("Details", "Details", new { id = Model.Id})
+    </p>
+</div>

@@ -6,8 +6,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+
 using TicketingSystem.Data;
 using TicketingSystem.Data.Migrations;
+
+using TicketingSystem.Web.App_Start;
 
 namespace TicketingSystem.Web
 {
@@ -16,6 +19,8 @@ namespace TicketingSystem.Web
         protected void Application_Start()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<TicketingSystemDbContext, Configuration>());
+
+            AutoMapperConfig.RegisterMappings();
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

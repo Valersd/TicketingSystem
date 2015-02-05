@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Ticketing System</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -17,14 +17,34 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Ticketing System", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Tickets", "Index", "Tickets")</li>
+                        <li>@Html.ActionLink("Add Ticket", "Create", "Tickets")</li>
+                    }
+                    @if (User.IsInRole(TicketingSystem.Common.GlobalConstants.AdminRole))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                Admin Aria
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li role="presentation" class="dropdown-header">Categories</li>
+                                <li>@Html.ActionLink("Add", "Create", "Categories", new { area = "Admin" }, null)</li>
+                                <li>@Html.ActionLink("All categories", "Index", "Categories", new { area = "Admin" }, null)</li>
+                                <li class="divider"></li>
+                                <li role="presentation" class="dropdown-header">Comments</li>
+                                <li>@Html.ActionLink("All comments", "Index", "Comments", new { area = "Admin" }, null)</li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -32,12 +52,13 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <footer class="text-center">
+            <p>&copy; @DateTime.Now.Year - Ticketing System</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ajax")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

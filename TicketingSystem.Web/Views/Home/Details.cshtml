@@ -1,0 +1,82 @@
+﻿@model TicketingSystem.Web.ViewModels.TicketDetails
+
+@{
+    ViewBag.Title = "Ticket Details";
+}
+
+<h4>@ViewBag.Title</h4>
+<hr />
+<h3>@Model.Title</h3>
+<h4>Category: @Model.Category</h4>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Author)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Author)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Priority)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Priority)
+            </dd>
+
+        </dl>
+    </div>
+    <div class="col-md-4">
+        @if (Model.ScreenshotUrl != null)
+        {
+            <img src="@Model.ScreenshotUrl" alt="Ticket image" class="img-responsive" />
+        }
+    </div>
+    <div class="col-md-4">
+        @if (Model.Description != null)
+        {
+            <p class="text-justify">
+                <strong>@Html.DisplayNameFor(m => m.Description): </strong>
+                @Html.DisplayFor(m => m.Description)
+            </p>
+        }
+    </div>
+</div>
+<div id="commentsContainer">
+    <ul id="comments">
+        @foreach (var comment in Model.Comments.OrderByDescending(c => c.Id))
+        {
+            @Html.Partial("_CommentInTicket", comment);
+        }
+    </ul>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        @using (Ajax.BeginForm("Create", "Comments", new { area = "" }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.InsertBefore, UpdateTargetId = "comments", OnComplete = "ClearInput" }, null))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.Partial("_Comment", new TicketingSystem.Web.Models.CommentInput(), new ViewDataDictionary { { "TicketId", Model.Id } })
+            <input type="submit" name="addComment" value="Send" class="btn btn-info" />
+        }
+    </div>
+}
+
+@section scripts{
+    <script>
+        function ClearInput() {
+            $('#Content').val('');
+        }
+    </script>
+}

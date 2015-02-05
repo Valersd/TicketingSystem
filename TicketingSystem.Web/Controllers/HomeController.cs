@@ -1,29 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
+using TicketingSystem.Data;
+using TicketingSystem.Web.Models;
+using TicketingSystem.Web.ViewModels;
+
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace TicketingSystem.Web.Controllers
 {
-    public class HomeController : Controller
+    [AllowAnonymous]
+    public class HomeController : BaseController
     {
+        public HomeController(ITicketingSystemData data)
+            :base(data)
+        {
+        }
         public ActionResult Index()
         {
-            return View();
+            var tickets = Data.Tickets.All()
+                .OrderByDescending(t => t.Comments.Count)
+                .Take(6)
+                .Project().To<TicketIndex>()
+                .ToList();
+            return View(tickets);
         }
 
-        public ActionResult About()
+        public ActionResult Details(int? id)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var ticket = Data.Tickets.All()
+                .Where(t=>t.Id == id.Value)
+                .Project().To<TicketDetails>()
+                .FirstOrDefault();
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ticket);
         }
 
-        public ActionResult Contact()
+        public ActionResult Error()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

@@ -63,7 +63,7 @@ namespace TicketingSystem.Web.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Username")]
+        [Display(Name = "User Name")]
         [StringLength(16,MinimumLength=6)]
         public string Username { get; set; }
 

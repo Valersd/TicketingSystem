@@ -1,0 +1,13 @@
+﻿@model TicketingSystem.Web.Models.CommentInput
+
+@{
+    Model.Id = Convert.ToInt32(ViewData["TicketId"]);
+}
+
+@Html.HiddenFor(m=>m.Id)
+
+<div class="form-group">
+    @Html.LabelFor(m=>m.Content)
+    @Html.TextAreaFor(m => m.Content, new {rows="5", @class="form-control"})
+    @Html.ValidationMessageFor(m => m.Content, "", new { @class="text-danger" })
+</div>
