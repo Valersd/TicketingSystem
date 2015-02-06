@@ -11,6 +11,7 @@ using TicketingSystem.Web.ViewModels;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using System.Web.Caching;
 
 namespace TicketingSystem.Web.Controllers
 {
@@ -23,11 +24,18 @@ namespace TicketingSystem.Web.Controllers
         }
         public ActionResult Index()
         {
-            var tickets = Data.Tickets.All()
-                .OrderByDescending(t => t.Comments.Count)
-                .Take(6)
-                .Project().To<TicketIndex>()
-                .ToList();
+            var tickets = (List<TicketIndex>)HttpContext.Cache["mostCommentTickets"];
+            if (tickets == null)
+            {
+                    tickets = Data.Tickets.All()
+                    .OrderByDescending(t => t.Comments.Count)
+                    .Take(6)
+                    .Project().To<TicketIndex>()
+                    .ToList();
+
+                HttpContext.Cache.Add("mostCommentTickets", tickets, null, DateTime.Now.AddMinutes(60),Cache.NoSlidingExpiration, CacheItemPriority.Normal, null);
+            }
+
             return View(tickets);
         }
 

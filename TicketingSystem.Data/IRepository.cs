@@ -14,7 +14,7 @@ namespace TicketingSystem.Data
 
         void Delete(T entity);
 
-        void Delete(int id);
+        void Delete(object id);
 
         void Detach(T entity);
     }

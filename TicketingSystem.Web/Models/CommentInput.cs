@@ -13,7 +13,7 @@ namespace TicketingSystem.Web.Models
         [Display(Name="Add Comment")]
         public string Content { get; set; }
 
-        public int Id { get; set; }
+        public int TicketId { get; set; }
 
     }
 }

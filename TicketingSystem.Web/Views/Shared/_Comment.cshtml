@@ -1,10 +1,10 @@
 ﻿@model TicketingSystem.Web.Models.CommentInput
 
 @{
-    Model.Id = Convert.ToInt32(ViewData["TicketId"]);
+    Model.TicketId = Convert.ToInt32(ViewData["TicketId"]);
 }
 
-@Html.HiddenFor(m=>m.Id)
+@Html.HiddenFor(m=>m.TicketId)
 
 <div class="form-group">
     @Html.LabelFor(m=>m.Content)

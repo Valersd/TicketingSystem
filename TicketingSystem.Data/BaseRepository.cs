@@ -70,7 +70,7 @@ namespace TicketingSystem.Data
             }
         }
 
-        public virtual void Delete(int id)
+        public virtual void Delete(object id)
         {
             var entity = this.GetById(id);
 

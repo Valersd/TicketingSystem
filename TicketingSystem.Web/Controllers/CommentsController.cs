@@ -30,7 +30,7 @@ namespace TicketingSystem.Web.Controllers
                     Comment newComment = new Comment
                     {
                         Content = comment.Content,
-                        TicketId = comment.Id,
+                        TicketId = comment.TicketId,
                         AuthorId = User.Identity.GetUserId()
                     };
 
@@ -44,7 +44,7 @@ namespace TicketingSystem.Web.Controllers
                 }
             }
 
-            return RedirectToAction("Details", "Home", new { id = comment.Id });
+            return RedirectToAction("Details", "Home", new { id = comment.TicketId });
         }
     }
 }
