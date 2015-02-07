@@ -57,7 +57,8 @@
     </ul>
 </div>
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a href="javascript:history.go(-1)">Back to List</a>
 </p>
 
 @if (User.Identity.IsAuthenticated)

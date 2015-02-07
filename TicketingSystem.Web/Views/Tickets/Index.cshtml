@@ -1,0 +1,56 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<TicketInTicketsIndex>
+
+@{
+    ViewBag.Title = "Tickets List";
+}
+
+<h3>@ViewBag.Title</h3>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "Tickets", FormMethod.Get, new { @class = "form-horizontal", role = "form", name = "byCategory" }))
+    {
+        <div class="form-group col-md-6">
+            <label for="catId" class="control-label col-md-4">Filter by category:</label>
+            <div class="col-md-8">
+                @Html.DropDownList("catId", (SelectList)ViewBag.Categories, "--Select category--", new { @class = "form-control" })
+            </div>
+        </div>
+    }
+    <form action="/Tickets/Search" method="get" class="form-horizontal">
+        <div class="form-group col-md-6">
+            <label for="ticketTitle" class="control-label col-md-4">Search by ticket title:</label>
+            <div class="col-md-8">
+                @Html.TextBox("ticketTitle", "", new { @class = "form-control", placeholder="At least two letters" })
+            </div>
+        </div>
+    </form>
+</div>
+<br />
+
+<table class="table table-hover" id="tickets">
+    <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Author</th>
+        <th>Priority</th>
+    </tr>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <tr>
+            <td>@Html.ActionLink(Model[i].Title, "Details", "Home", new { id = Model[i].Id }, null)</td>
+            <td>@Model[i].CategoryName</td>
+            <td>@Model[i].AuthorName</td>
+            <td>@Model[i].Priority</td>
+        </tr>
+    }
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "Tickets", new { page = page, catId = (int?)ViewBag.SelectedCategory }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+
+@section scripts{
+    @Scripts.Render("~/Scripts/Custom/filter-tickets.js")
+}
