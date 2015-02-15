@@ -10,36 +10,60 @@ namespace TicketingSystem.Web.Common
     public class DoNotContainAttribute: ValidationAttribute, IClientValidatable
     {
         private string forbidden;
+        private const string DefaultErrorMessage = "{0} should not contains \"{1}\" !";
 
         public DoNotContainAttribute(string forbidden)
+            :base(DefaultErrorMessage)
         {
             this.forbidden = forbidden;
         }
 
-        public override bool IsValid(object propertyValue)
+
+        protected override ValidationResult IsValid(object propertyValue, ValidationContext validationContext)
         {
             if (string.IsNullOrEmpty(this.forbidden))
             {
-                return true;
+                return ValidationResult.Success;
             }
 
             if (propertyValue == null)
             {
-                return true;
+                return ValidationResult.Success;
             }
 
             string propertyValueToLower = ((string)propertyValue).ToLower();
 
-            if (propertyValueToLower.IndexOf(this.forbidden.ToLower()) >= 0 )
+            if (propertyValueToLower.IndexOf(this.forbidden.ToLower()) >= 0)
             {
-                return false;
+                return new ValidationResult(FormatErrorMessage(validationContext.DisplayName), new[] { validationContext.MemberName });
             }
-            return true;
+            return ValidationResult.Success;
         }
+
+        //public override bool IsValid(object propertyValue)
+        //{
+        //    if (string.IsNullOrEmpty(this.forbidden))
+        //    {
+        //        return true;
+        //    }
+
+        //    if (propertyValue == null)
+        //    {
+        //        return true;
+        //    }
+
+        //    string propertyValueToLower = ((string)propertyValue).ToLower();
+
+        //    if (propertyValueToLower.IndexOf(this.forbidden.ToLower()) >= 0 )
+        //    {
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         public override string FormatErrorMessage(string name)
         {
-            return string.Format("{0} should not contains \"{1}\" !", name, this.forbidden);
+            return String.Format(this.ErrorMessageString, name, this.forbidden);
         }
 
         public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)

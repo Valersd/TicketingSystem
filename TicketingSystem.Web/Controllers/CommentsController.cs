@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 using TicketingSystem.Data;
 using TicketingSystem.Models;
 using TicketingSystem.Web.Models;
-using Microsoft.AspNet.Identity;
-using AutoMapper;
 using TicketingSystem.Web.ViewModels;
+
+using AutoMapper;
 
 namespace TicketingSystem.Web.Controllers
 {
     public class CommentsController : BaseController
     {
+
         public CommentsController(ITicketingSystemData data)
             : base(data)
         {
@@ -27,18 +31,22 @@ namespace TicketingSystem.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var userId = CurrentUser.Id;
+
                     Comment newComment = new Comment
                     {
                         Content = comment.Content,
                         TicketId = comment.TicketId,
-                        AuthorId = User.Identity.GetUserId()
+                        AuthorId = userId
                     };
 
                     Data.Comments.Add(newComment);
+                    CurrentUser.Points++;
                     Data.SaveChanges();
 
+
                     var commentModel = Mapper.Map<CommentInTicket>(newComment);
-                    commentModel.Author = User.Identity.Name;
+                    commentModel.Author = CurrentUser.UserName;
 
                     return PartialView("_CommentInTicket", commentModel);
                 }
