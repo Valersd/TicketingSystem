@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TicketingSystem.Data;
-using TicketingSystem.Web.Models;
+using Microsoft.AspNet.Identity;
 
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using TicketingSystem.Web.ViewModels;
 
 using PagedList;
 using PagedList.Mvc;
+
+using TicketingSystem.Models;
+using TicketingSystem.Data;
+using TicketingSystem.Web.Models;
+using TicketingSystem.Web.ViewModels;
+
 
 namespace TicketingSystem.Web.Controllers
 {
@@ -38,7 +43,7 @@ namespace TicketingSystem.Web.Controllers
             }
 
             var pagableTickets = tickets
-            .OrderBy(t => t.Id)
+            .OrderByDescending(t => t.Id)
             .Project()
             .To<TicketInTicketsIndex>()
             .ToPagedList(page ?? 1, 5);
@@ -53,6 +58,47 @@ namespace TicketingSystem.Web.Controllers
                 .Project()
                 .To<TicketInTicketsIndex>();
             return Json(tickets, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            PopulateCategories();
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(TicketInput ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                Ticket newTicket = Mapper.Map<Ticket>(ticket);
+                newTicket.AuthorId = User.Identity.GetUserId();
+
+                Data.Tickets.Add(newTicket);
+                Data.SaveChanges();
+
+                return RedirectToAction("Details", "Home", new { id = newTicket.Id, area = "" });
+            }
+
+            PopulateCategories();
+
+            return View(ticket);
+        }
+
+        private void PopulateCategories()
+        {
+            var categories = Data.Categories.All()
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                })
+                .ToList();
+
+            ViewBag.Categories = categories;
         }
     }
 }

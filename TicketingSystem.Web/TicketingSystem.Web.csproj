@@ -202,6 +202,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Common\DoNotContainAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -214,6 +215,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BaseController.cs" />
     <Compile Include="Models\CommentInput.cs" />
+    <Compile Include="Models\TicketInput.cs" />
     <Compile Include="ViewModels\CommentInTicket.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,6 +236,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
+    <Content Include="Scripts\Custom\donotcontain-validation.js" />
     <Content Include="Scripts\Custom\filter-tickets.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -286,6 +289,7 @@
     <Content Include="Views\Shared\_CommentInTicket.cshtml" />
     <Content Include="Views\Shared\_Comment.cshtml" />
     <Content Include="Views\Tickets\Index.cshtml" />
+    <Content Include="Views\Tickets\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

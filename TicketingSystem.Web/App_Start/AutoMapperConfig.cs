@@ -7,6 +7,7 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using TicketingSystem.Models;
 using TicketingSystem.Web.ViewModels;
+using TicketingSystem.Web.Models;
 
 namespace TicketingSystem.Web.App_Start
 {
@@ -32,6 +33,8 @@ namespace TicketingSystem.Web.App_Start
                 .ForMember(t => t.CategoryName, opt => opt.MapFrom(s => s.Category.Name))
                 .ForMember(t => t.AuthorName, opt => opt.MapFrom(s => s.Author.UserName))
                 .ForMember(t => t.Priority, opt => opt.MapFrom(s => s.Priority));
+
+            Mapper.CreateMap<TicketInput, Ticket>();
         }
     }
 }
