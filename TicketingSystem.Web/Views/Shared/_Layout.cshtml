@@ -23,8 +23,8 @@
                 <ul class="nav navbar-nav">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Tickets", "Index", "Tickets")</li>
-                        <li>@Html.ActionLink("Add Ticket", "Create", "Tickets")</li>
+                        <li>@Html.ActionLink("Tickets", "Index", "Tickets", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Add Ticket", "Create", "Tickets", new { area = "" }, null)</li>
                     }
                     @if (User.IsInRole(TicketingSystem.Common.GlobalConstants.AdminRole))
                     {

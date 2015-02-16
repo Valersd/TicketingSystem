@@ -91,6 +91,7 @@ namespace TicketingSystem.Web.Controllers
         private void PopulateCategories()
         {
             var categories = Data.Categories.All()
+                .OrderBy(c => c.Name)
                 .Select(c => new SelectListItem
                 {
                     Text = c.Name,

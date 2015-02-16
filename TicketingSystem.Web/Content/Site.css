@@ -31,3 +31,7 @@ textarea {
 .text-justify{
     text-align:justify;
 }
+
+.message{
+    display:none;
+}

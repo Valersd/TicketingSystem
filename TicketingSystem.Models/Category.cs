@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TicketingSystem.Models
 {
@@ -16,7 +17,8 @@ namespace TicketingSystem.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(20,MinimumLength=3)]
+        [StringLength(20,MinimumLength=2)]
+        [Index(IsUnique=true)]
         public string Name { get; set; }
 
         public virtual ICollection<Ticket> Tickets

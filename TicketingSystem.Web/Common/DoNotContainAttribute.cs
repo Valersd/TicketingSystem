@@ -5,12 +5,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using TicketingSystem.Common;
+
 namespace TicketingSystem.Web.Common
 {
     public class DoNotContainAttribute: ValidationAttribute, IClientValidatable
     {
         private string forbidden;
-        private const string DefaultErrorMessage = "{0} should not contains \"{1}\" !";
+        private const string DefaultErrorMessage = GlobalConstants.DoNotContain;
 
         public DoNotContainAttribute(string forbidden)
             :base(DefaultErrorMessage)
