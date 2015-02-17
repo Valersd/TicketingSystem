@@ -1,0 +1,30 @@
+﻿@model int
+@{
+    ViewBag.Title = "Delete comment";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <p class="h3">
+        Are you sure you want to delete comment ?
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.Hidden("id", Model)
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />&nbsp;&nbsp;
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+<br />
+<p>
+    <a href="javascript:history.go(-1)">Go Back</a>
+</p>
+

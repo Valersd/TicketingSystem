@@ -19,15 +19,15 @@
 <table class="table table-hover">
     <tr>
         <th>Name</th>
-        <th>Count of tickets</th>
-        <th>Action</th>
+        <th class="text-center">Count of tickets</th>
+        <th class="text-center">Action</th>
     </tr>
     @foreach (var category in Model)
     {
         <tr>
-            <td>@category.Name</td>
-            <td>@category.TicketsCount</td>
-            <td>
+            <td>@Html.DisplayFor(c => category.Name)</td>
+            <td class="text-center">@Html.DisplayFor(c => category.TicketsCount)</td>
+            <td class="text-center">
                 @Html.ActionLink("Edit", "Edit", new { id = category.Id }) | 
                 @Html.ActionLink("Delete", "Delete", new { id = category.Id })
             </td>
@@ -38,10 +38,6 @@
 @Html.PagedListPager(Model,page => Url.Action("Index","Categories",new { page = page, area = "Admin"}), PagedListRenderOptions.ClassicPlusFirstAndLast)
 
 @section scripts{
-    <script type="text/javascript">
-        $(function () {
-            $('.message').show(1000).delay(3000).hide(1000);
-        })
-    </script>
+    @Scripts.Render("~/bundles/show-hide-message")
 }
 

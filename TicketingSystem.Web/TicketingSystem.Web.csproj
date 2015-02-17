@@ -203,9 +203,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminCommentsController.cs" />
     <Compile Include="Areas\Admin\Models\CategoryEdit.cs" />
     <Compile Include="Areas\Admin\Models\CategoryInput.cs" />
+    <Compile Include="Areas\Admin\Models\CommentEdit.cs" />
     <Compile Include="Areas\Admin\ViewModels\CategoryIndex.cs" />
+    <Compile Include="Areas\Admin\ViewModels\CommentIndex.cs" />
     <Compile Include="Common\DoNotContainAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
@@ -245,9 +248,13 @@
     <Content Include="Areas\Admin\Views\Shared\_Message.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\Categories\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminComments\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminComments\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminComments\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\Custom\donotcontain-validation.js" />
     <Content Include="Scripts\Custom\filter-tickets.js" />
+    <Content Include="Scripts\Custom\show-hide-message.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />

@@ -20,6 +20,9 @@ namespace TicketingSystem.Web
             bundles.Add(new ScriptBundle("~/bundles/custom-validation").Include(
                         "~/Scripts/Custom/donotcontain-validation.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/show-hide-message").Include(
+                        "~/Scripts/Custom/show-hide-message.js"));
+
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

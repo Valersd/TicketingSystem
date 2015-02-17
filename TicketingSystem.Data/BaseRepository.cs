@@ -24,7 +24,8 @@ namespace TicketingSystem.Data
 
         public virtual IQueryable<T> All()
         {
-            return this.DbSet.AsQueryable();
+            //return this.DbSet.AsQueryable(); before
+            return this.DbSet.AsQueryable().AsNoTracking(); //after
         }
 
         public virtual T GetById(object id)
@@ -45,15 +46,19 @@ namespace TicketingSystem.Data
             }
         }
 
-        public virtual void Update(T entity)
+        public virtual void Update(T entity,params string[] excludProp)
         {
             DbEntityEntry entry = this.Context.Entry(entity);
             if (entry.State == EntityState.Detached)
             {
                 this.DbSet.Attach(entity);
+                entry.State = EntityState.Modified;
+                foreach (var prop in excludProp)
+                {
+                    entry.Property(prop).IsModified = false;
+                }
             }
-
-            entry.State = EntityState.Modified;
+            //entry.State = EntityState.Modified;
         }
 
         public virtual void Delete(T entity)

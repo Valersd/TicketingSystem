@@ -1,0 +1,59 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<TicketingSystem.Web.Areas.Admin.ViewModels.CommentIndex>
+
+@{
+    ViewBag.Title = "Comments";
+}
+
+@if (TempData["message"] != null)
+{
+    @Html.Partial("_Message");
+}
+
+<h2>@ViewBag.Title</h2>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "AdminComments", new { page = page, area = "Admin" }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+<table class="table table-hover" id="tblComments">
+    <tr>
+        <th class="comment-large">
+            Comment
+        </th>
+        <th class="comment-large">
+            Ticket
+        </th>
+        <th class="comment-large">
+            Author
+        </th>
+        <th class="comment-small text-center">
+            Action
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TicketTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AuthorName)
+        </td>
+        <td class="text-center">
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) | 
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "AdminComments", new { page = page, area = "Admin" }),PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+@section scripts{
+    @Scripts.Render("~/bundles/show-hide-message")
+}

@@ -35,3 +35,15 @@ textarea {
 .message{
     display:none;
 }
+
+.comment-large{
+    width:28%;
+}
+
+.comment-small{
+    width:16%;
+}
+
+#tblComments td{
+    vertical-align:middle;
+}

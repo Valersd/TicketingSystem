@@ -10,7 +10,8 @@ namespace TicketingSystem.Data
 
         void Add(T entity);
 
-        void Update(T entity);
+        //void Update(T entity);
+        void Update(T entity, params string[] excludProp);
 
         void Delete(T entity);
 

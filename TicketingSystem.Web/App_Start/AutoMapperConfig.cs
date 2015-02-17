@@ -46,6 +46,14 @@ namespace TicketingSystem.Web.App_Start
             Mapper.CreateMap<Category, CategoryEdit>();
 
             Mapper.CreateMap<CategoryEdit, Category>();
+
+            Mapper.CreateMap<Comment, CommentIndex>()
+                .ForMember(c => c.AuthorName, opt => opt.MapFrom(s => s.Author.UserName))
+                .ForMember(c => c.TicketTitle, opt => opt.MapFrom(s => s.Ticket.Title));
+
+            Mapper.CreateMap<Comment, CommentEdit>();
+
+            Mapper.CreateMap<CommentEdit, Comment>();
         }
     }
 }

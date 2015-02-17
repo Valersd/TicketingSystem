@@ -81,6 +81,7 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var category = Data.Categories.GetById(id.Value);
+            //var category = Data.Categories.All().FirstOrDefault();
             if (category == null)
             {
                 return HttpNotFound();
@@ -94,16 +95,22 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Edit(int id, CategoryEdit category)
         {
-            var editCategory = Mapper.Map<Category>(category);
-
             try
             {
-                Data.Categories.Update(editCategory);
-                Data.SaveChanges();
 
-                TempData["message"] = "Category successfully edited";
-                TempData["color"] = "alert-success";
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    var editCategory = Mapper.Map<Category>(category);
+
+                    Data.Categories.Update(editCategory);
+                    Data.SaveChanges();
+
+                    TempData["message"] = "Category successfully edited";
+                    TempData["color"] = "alert-success";
+                    return RedirectToAction("Index");
+                }
+                
+                return View(category);
             }
             catch(Exception)
             {
@@ -142,7 +149,6 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
                 Data.SaveChanges();
                 TempData["message"] = "Category successfully deleted";
                 TempData["color"] = "alert-success";
-                return RedirectToAction("Index");
             }
             catch (Exception)
             {
@@ -150,6 +156,8 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
                 TempData["color"] = "alert-danger";
                 return RedirectToAction("Index");
             }
+
+            return RedirectToAction("Index");        
         }
     }
 }
