@@ -1,0 +1,65 @@
+﻿@model TicketingSystem.Web.Areas.Admin.ViewModels.UserDetails
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <hr />
+    <h3>@Model.Username</h3>
+    <br />
+
+    <h4>@Html.DisplayNameFor(m=>Model.Tickets)</h4>
+    <table class="table table-hover">
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Prioriry</th>
+        </tr>
+
+        @foreach (var ticket in Model.Tickets.OrderByDescending(t => t.Id))
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(ticket.Title, "Details", "Home", new { area = "", id = ticket.Id }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=>ticket.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(m=>ticket.Priority)
+                </td>
+            </tr>
+        }
+
+    </table>
+    <hr />
+    <br />
+
+    <h4>@Html.DisplayNameFor(m=>m.Comments)</h4>
+    <table class="table">
+        <tr>
+            <th>Content</th>
+            <th>Ticket</th>
+        </tr>
+
+        @foreach (var comment in Model.Comments)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(comment.Content, "Edit", "AdminComments", new { area="Admin", id=comment.Id }, null)
+                </td>
+                <td>
+                    @Html.ActionLink(comment.Ticket, "Details", "Home", new { area = "", id = comment.TicketId }, null)
+                </td>
+            </tr>
+        }
+    </table>
+
+</div>
+<p>
+    @*@Html.ActionLink("Back to List", "Index")*@
+    <a href="javascript:history.go(-1)">Go Back</a>
+</p>

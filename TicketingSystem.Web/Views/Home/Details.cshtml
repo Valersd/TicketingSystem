@@ -59,7 +59,7 @@
     <a href="javascript:history.go(-1)">Go Back</a>
 </p>
 
-@if (User.Identity.IsAuthenticated)
+@if (User.Identity.IsAuthenticated && !User.IsInRole(GlobalConstants.InactiveRole))
 {
     <div>
         @using (Ajax.BeginForm("Create", "Comments", new { area = "" }, new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.InsertBefore, UpdateTargetId = "comments", OnComplete = "ClearInput" }, null))

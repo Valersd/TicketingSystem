@@ -5,6 +5,10 @@ namespace TicketingSystem.Web.App_Start
 {
     using System;
     using System.Web;
+    using System.Data.Entity;
+
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
@@ -13,7 +17,6 @@ namespace TicketingSystem.Web.App_Start
 
     using TicketingSystem.Models;
     using TicketingSystem.Data;
-    using System.Data.Entity;
 
     public static class NinjectWebCommon 
     {
@@ -68,6 +71,12 @@ namespace TicketingSystem.Web.App_Start
             kernel.Bind<ITicketingSystemData>().To<TicketingSystemData>();
             kernel.Bind<DbContext>().To<TicketingSystemDbContext>();
             kernel.Bind(typeof(IRepository<>)).To(typeof(BaseRepository<>));
+
+            kernel.Bind(typeof(IUserStore<User>)).To(typeof(UserStore<User>)).WithConstructorArgument("context", kernel.Get<DbContext>());
+            //kernel.Bind<UserManager<User>>().ToSelf();
+
+            kernel.Bind(typeof(IRoleStore<IdentityRole>)).To(typeof(RoleStore<IdentityRole>)).WithConstructorArgument("context", kernel.Get<DbContext>());
+            kernel.Bind<RoleManager<IdentityRole>>().ToSelf().WithConstructorArgument("store",kernel.Get<RoleStore<IdentityRole>>());
         }        
     }
 }

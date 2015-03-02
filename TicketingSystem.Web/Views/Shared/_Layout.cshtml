@@ -21,7 +21,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated && !User.IsInRole(GlobalConstants.InactiveRole))
                     {
                         <li>@Html.ActionLink("Tickets", "Index", "Tickets", new { area = "" }, null)</li>
                         <li>@Html.ActionLink("Add Ticket", "Create", "Tickets", new { area = "" }, null)</li>
@@ -40,6 +40,9 @@
                                 <li class="divider"></li>
                                 <li role="presentation" class="dropdown-header">Comments</li>
                                 <li>@Html.ActionLink("All comments", "Index", "AdminComments", new { area = "Admin" }, null)</li>
+                                <li class="divider"></li>
+                                <li role="presentation" class="dropdown-header">Users</li>
+                                <li>@Html.ActionLink("All users", "Index", "Users", new { area = "Admin" }, null)</li>
                             </ul>
                         </li>
                     }

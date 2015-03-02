@@ -9,6 +9,8 @@ namespace TicketingSystem.Data
         public TicketingSystemDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
 
         public virtual IDbSet<Category> Categories { get; set; }

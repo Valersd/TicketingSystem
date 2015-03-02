@@ -18,6 +18,7 @@ using TicketingSystem.Models;
 
 namespace TicketingSystem.Web.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminCommentsController : BaseController
     {
         public AdminCommentsController(ITicketingSystemData data)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+
 using Microsoft.AspNet.Identity;
 
 using AutoMapper;
@@ -43,10 +45,12 @@ namespace TicketingSystem.Web.Controllers
             }
 
             var pagableTickets = tickets
-            .OrderByDescending(t => t.Id)
-            .Project()
-            .To<TicketInTicketsIndex>()
-            .ToPagedList(page ?? 1, 5);
+                .Include(t => t.Category)
+                .Include(t => t.Comments)
+                .OrderByDescending(t => t.Id)
+                .Project()
+                .To<TicketInTicketsIndex>()
+                .ToPagedList(page ?? 1, 5);
 
             return View(pagableTickets);
         }
@@ -57,7 +61,7 @@ namespace TicketingSystem.Web.Controllers
                 .Where(t => t.Title.Contains(titlePart))
                 .Project()
                 .To<TicketInTicketsIndex>();
-            return Json(tickets, JsonRequestBehavior.AllowGet);
+            return Json(tickets.AsEnumerable(), JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]

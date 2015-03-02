@@ -33,12 +33,8 @@ namespace TicketingSystem.Web.Controllers
                 {
                     var userId = CurrentUser.Id;
 
-                    Comment newComment = new Comment
-                    {
-                        Content = comment.Content,
-                        TicketId = comment.TicketId,
-                        AuthorId = userId
-                    };
+                    Comment newComment = Mapper.Map<Comment>(comment);
+                    newComment.AuthorId = userId;
 
                     Data.Comments.Add(newComment);
                     CurrentUser.Points++;

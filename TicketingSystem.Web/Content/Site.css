@@ -3,6 +3,7 @@
     padding-bottom: 20px;
     -ms-word-wrap: break-word;
     word-wrap: break-word;
+    background-color:azure;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -46,4 +47,9 @@ textarea {
 
 #tblComments td{
     vertical-align:middle;
+}
+
+a:hover{
+    text-decoration:none;
+    font-style:oblique;
 }

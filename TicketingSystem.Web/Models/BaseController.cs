@@ -11,7 +11,8 @@ using TicketingSystem.Models;
 
 namespace TicketingSystem.Web.Models
 {
-    [Authorize]
+    [Authorize(Roles="Admin, User")]
+    [ValidateInput(false)]
     public class BaseController : Controller
     {
         private ITicketingSystemData _data;
@@ -42,14 +43,15 @@ namespace TicketingSystem.Web.Models
         {
             get
             {
-                return GetCurrentUser(Data);
+                return GetCurrentUser();
             }
         }
 
-        private User GetCurrentUser(ITicketingSystemData _data)
+        private User GetCurrentUser()
         {
-            var userManager = new UserManager<User>(new UserStore<User>(Data.Context));
-            return userManager.FindById(User.Identity.GetUserId());
+            return Data.Users.GetById(User.Identity.GetUserId());
+            //var userManager = new UserManager<User>(new UserStore<User>(Data.Context));
+            //return userManager.FindById(User.Identity.GetUserId());
         }
     }
 }

@@ -1,0 +1,64 @@
+﻿@model TicketingSystem.Web.Areas.Admin.Models.UserEditRole
+
+@{
+    ViewBag.Title = "Edit Role";
+}
+
+@if (TempData["message"] != null)
+{
+    @Html.Partial("_Message")
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<form action="/Admin/Users/Edit" method="post" class="form-horizontal">
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(id => Model.Id)
+
+
+    <div class="row">
+        <div class="col-md-2"><h4 class="text-right">User Name</h4></div>
+        <div class="col-md-10"><h4 class="text-left">@Model.UserName</h4></div>
+        <input type="hidden" name="UserName" value="@Model.UserName" />
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-2"><h4 class="text-right">Current Role</h4></div>
+        <div class="col-md-10"><h4 class="text-left">@Model.Role</h4></div>
+    </div>
+    <br />
+
+    <div class="form-group">
+        @Html.LabelFor(model => Model.Role, "New Role", htmlAttributes: new { @class = "control-label col-md-2 h4" })
+        <div class="col-md-10">
+            @foreach (var role in Model.Roles)
+            {
+                @Html.RadioButtonFor(m => Model.Role, role, new { id = role })
+                <label for="@role" class="control-label h4">@role</label>
+                @:&nbsp;&nbsp;
+            }
+        </div>
+    </div>
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-success" />
+        </div>
+    </div>
+
+</form>
+
+
+
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+@section scripts{
+    @Scripts.Render("~/bundles/show-hide-message")
+}
+

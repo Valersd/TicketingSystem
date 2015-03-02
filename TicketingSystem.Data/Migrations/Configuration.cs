@@ -30,7 +30,10 @@ namespace TicketingSystem.Data.Migrations
                 return;
             }
             var userManager = new UserManager<User>(new UserStore<User>(context));
-            context.Roles.AddOrUpdate(r => r.Name, new IdentityRole(GlobalConstants.AdminRole), new IdentityRole(GlobalConstants.UserRole));
+            context.Roles.AddOrUpdate(r => r.Name, 
+                new IdentityRole(GlobalConstants.AdminRole), 
+                new IdentityRole(GlobalConstants.UserRole),
+                new IdentityRole(GlobalConstants.InactiveRole));
             context.SaveChanges();
             for (int i = 0; i < 10; i++)
             {

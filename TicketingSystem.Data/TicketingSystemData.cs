@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using TicketingSystem.Models;
@@ -28,6 +29,11 @@ namespace TicketingSystem.Data
         public IRepository<User> Users
         {
             get { return this.GetRepository<User>(); }
+        }
+
+        public IRepository<IdentityRole> Roles
+        {
+            get { return this.GetRepository<IdentityRole>(); }
         }
 
         public IRepository<Category> Categories
