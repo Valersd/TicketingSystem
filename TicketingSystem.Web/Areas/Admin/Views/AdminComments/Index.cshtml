@@ -16,15 +16,15 @@
 
 @Html.PagedListPager(Model, page => Url.Action("Index", "AdminComments", new { page = page, area = "Admin" }), PagedListRenderOptions.ClassicPlusFirstAndLast)
 
-<table class="table table-hover" id="tblComments">
+<table class="table" id="tblComments">
     <tr>
-        <th class="comment-large">
+        <th style="width:50%">
             Comment
         </th>
-        <th class="comment-large">
+        <th>
             Ticket
         </th>
-        <th class="comment-large">
+        <th>
             Author
         </th>
         <th class="comment-small text-center">

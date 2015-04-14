@@ -7,7 +7,7 @@ namespace TicketingSystem.Data
     public class TicketingSystemDbContext : IdentityDbContext<User>
     {
         public TicketingSystemDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("TicketingSystem", throwIfV1Schema: false)
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;

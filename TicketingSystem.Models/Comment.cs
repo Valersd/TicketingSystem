@@ -8,7 +8,7 @@ namespace TicketingSystem.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(300,MinimumLength=5)]
+        [StringLength(1000,MinimumLength=5)]
         public string Content { get; set; }
 
         public string AuthorId { get; set; }

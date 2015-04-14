@@ -5,8 +5,9 @@
 }
 
 <h2>@ViewBag.Title</h2>
+<hr />
+
 <div>
-    <hr />
     <p class="h3">
         Are you sure you want to delete category @Model.Name with all @Model.TicketsCount tickets ?
     </p>
@@ -25,5 +26,5 @@
 </div>
 <br />
 <p>
-    <a href="javascript:history.go(-1)">Go Back</a>
+    <a href="javascript:history.go(-1)"><span class="violet"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>&nbsp;Go Back</span></a>
 </p>

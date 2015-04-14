@@ -6,6 +6,11 @@
     background-color:azure;
 }
 
+tr:hover{
+    background-color:antiquewhite;
+    cursor:default;
+}
+
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -33,12 +38,13 @@ textarea {
     text-align:justify;
 }
 
-.message{
-    display:none;
+.footer-text{
+    color:dodgerblue;
+    font-family:Rockwell;
 }
 
-.comment-large{
-    width:28%;
+.message{
+    display:none;
 }
 
 .comment-small{
@@ -49,7 +55,22 @@ textarea {
     vertical-align:middle;
 }
 
-a:hover{
+/*a:hover{
     text-decoration:none;
     font-style:oblique;
+}*/
+
+.violet{
+    font-weight:bold;
+    color:blueviolet!important;
+}
+
+    .violet:hover {
+        text-decoration:underline;
+        -moz-text-decoration-color: blueviolet!important;
+        text-decoration-color: blueviolet!important;
+    }
+
+.alert .h4{
+    color:inherit;
 }

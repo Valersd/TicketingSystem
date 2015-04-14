@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -78,6 +79,7 @@ namespace TicketingSystem.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                ticket.Title = UppercaseFirstLetter(ticket.Title);
                 Ticket newTicket = Mapper.Map<Ticket>(ticket);
                 newTicket.AuthorId = User.Identity.GetUserId();
 
@@ -104,6 +106,17 @@ namespace TicketingSystem.Web.Controllers
                 .ToList();
 
             ViewBag.Categories = categories;
+        }
+
+        private string UppercaseFirstLetter(string text)
+        {
+            if (string.IsNullOrEmpty(text))
+            {
+                return string.Empty;
+            }
+            char[] array = text.ToCharArray();
+            array[0] = Char.ToUpper(array[0]);
+            return new string(array);
         }
     }
 }

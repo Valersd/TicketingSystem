@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
+
 using System.Web;
 using System.Web.Mvc;
 
@@ -53,6 +55,7 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.Name = category.Name.ToUpper();
                 var newCategory = Mapper.Map<Category>(category);
                 Data.Categories.Add(newCategory);
                 try
@@ -64,7 +67,7 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("", "An error occurred.Maybe there is a category with that name.Try different name");
+                    ModelState.AddModelError("", "An error occurred. Maybe category with that name already exists. Try different name");
                     return View(category);
                 }
             }
@@ -114,7 +117,7 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
             }
             catch(Exception)
             {
-                ModelState.AddModelError("", "An error occurred.Maybe there is a category with that name.Try different name");
+                ModelState.AddModelError("", "An error occurred. Maybe category with that name already exists. Try different name");
                 return View(category);
             }
         }
@@ -127,7 +130,13 @@ namespace TicketingSystem.Web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var category = Data.Categories.GetById(id.Value);
+            var category = Data
+                .Categories
+                .All()
+                .Include(c => c.Tickets)
+                .Where(c => c.Id == id.Value)
+                .FirstOrDefault();
+
             if (category == null)
             {
                 return HttpNotFound();

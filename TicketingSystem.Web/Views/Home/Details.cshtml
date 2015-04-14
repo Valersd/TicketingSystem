@@ -4,10 +4,10 @@
     ViewBag.Title = "Ticket Details";
 }
 
-<h4>@ViewBag.Title</h4>
-<hr />
-<h3>@Model.Title</h3>
-<h4>Category: @Model.Category</h4>
+@*<h4>@ViewBag.Title</h4>
+<hr />*@
+<h3><strong>@Model.Title</strong></h3>
+<h4>Category: <strong>@Model.Category</strong></h4>
 
 
 <div class="row">
@@ -38,15 +38,21 @@
             <img src="@Model.ScreenshotUrl" alt="Ticket image" class="img-responsive" />
             <br />
         }
-        @if (Model.Description != null)
-        {
-            <p class="text-justify">
-                <strong>@Html.DisplayNameFor(m => m.Description): </strong>
-                @Html.DisplayFor(m => m.Description)
-            </p>
-        }
     </div>
 </div>
+@if (Model.Description != null)
+{
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(m=>m.Description)
+        </dt>
+
+        <dd>
+            <p class="text-justify" style="white-space:pre-line">@Html.DisplayFor(m => m.Description)</p>
+        </dd>
+    </dl>
+}
+<h4><strong>@Html.DisplayNameFor(m=>m.Comments)</strong></h4>
 <div id="commentsContainer">
     <ul id="comments">
         @foreach (var comment in Model.Comments.OrderByDescending(c => c.Id))
@@ -56,9 +62,8 @@
     </ul>
 </div>
 <p>
-    <a href="javascript:history.go(-1)">Go Back</a>
+    <a href="javascript:history.go(-1)"><span class="violet"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>&nbsp;Go Back</span></a>
 </p>
-
 @if (User.Identity.IsAuthenticated && !User.IsInRole(GlobalConstants.InactiveRole))
 {
     <div>

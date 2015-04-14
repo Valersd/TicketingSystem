@@ -23,7 +23,7 @@ namespace TicketingSystem.Models
 
         public PriorityType Priority { get; set; }
 
-        [StringLength(1000)]
+        [StringLength(4000)]
         public string Description { get; set; }
 
         [StringLength(100)]

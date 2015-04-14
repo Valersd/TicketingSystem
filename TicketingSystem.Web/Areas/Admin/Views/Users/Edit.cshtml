@@ -52,10 +52,12 @@
 
 </form>
 
-
+@*<p>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "violet" })
+</p>*@
 
 <p>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="javascript:history.go(-1)"><span class="violet"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>&nbsp;Back to list</span></a>
 </p>
 
 @section scripts{

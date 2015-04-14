@@ -69,10 +69,9 @@
     </div>
 }
 
-<div>
-    @*@Html.ActionLink("Back to List", "Index")*@
-    <a href="javascript:history.go(-1)">Go Back</a>
-</div>
+<p>
+    <a href="javascript:history.go(-1)"><span class="violet"><span class="glyphicon glyphicon-hand-left" aria-hidden="true"></span>&nbsp;Go Back</span></a>
+</p>
 
 @section Scripts {
     @Scripts.Render("~/bundles/custom-validation")
